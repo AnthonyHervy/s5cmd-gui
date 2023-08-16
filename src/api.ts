@@ -35,7 +35,7 @@ export async function downloadS3Objects(sources: FileData[], destination: string
   let commands: string[] = [];
   for (let source of sources) {
     if (source.isDir) {
-      commands.push(`cp ${source.id}* ${destination}/${source.name}`);
+      commands.push(`cp "${source.id}*" "${destination}/${source.name}"`);
     } else {
       commands.push(`cp ${source.id} ${destination}`);
     }
@@ -46,7 +46,7 @@ export async function downloadS3Objects(sources: FileData[], destination: string
 export async function uploadS3Objects(sources: string[], s3Destination: string) {
   let commands: string[] = [];
   for (let source of sources) {
-    commands.push(`cp ${source} ${s3Destination}`);
+    commands.push(`cp "${source}" "${s3Destination}"`);
   }
   return runS5cmdRun(commands);
 }
